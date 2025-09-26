@@ -15,14 +15,14 @@ import librarymanagement.Book;
  */
 public class BookService {
     private List<Book> books = new ArrayList<>();
-
+    
     public void addBook(Scanner sc) {
-        System.out.println("=== Add New Book ===");
+        System.out.println("\n=== Add New Book ===");
 
         System.out.print("Enter book ID: ");
         int id = sc.nextInt();
-        sc.nextLine(); // consume newline
-
+        sc.nextLine();
+        
         System.out.print("Enter title: ");
         String title = sc.nextLine();
 
@@ -34,12 +34,10 @@ public class BookService {
 
         System.out.print("Enter published year: ");
         int publishedYear = sc.nextInt();
-        sc.nextLine(); // consume newline
 
         System.out.print("Enter category: ");
         String category = sc.nextLine();
 
-        // Create new book (assuming available by default)
         Book book = new Book(id, publishedYear, isbn, title, author, category, true);
         books.add(book);
         System.out.println("Book added successfully!");
@@ -51,34 +49,32 @@ public class BookService {
             return;
         }
 
-        System.out.println("=== Remove Book ===");
-        System.out.println("Search by:");
+        System.out.println("\n=== Remove Book ===");
+        System.out.println("Remove by:");
         System.out.println("1. ID");
-        System.out.println("2. ISBN");
-        System.out.println("3. Title");
-        System.out.print("Enter choice: ");
-
-        int searchChoice = sc.nextInt();
-        sc.nextLine(); // consume newline
+        System.out.println("2. Title");
+        System.out.println("3. ISBN");
+        System.out.println("Enter choice: ");
 
         Book bookToRemove = null;
-
+        int searchChoice = sc.nextInt();
+        
         switch (searchChoice) {
             case 1:
-                System.out.print("Enter book ID: ");
+                System.out.println("Enter book ID: ");
                 int id = sc.nextInt();
-                sc.nextLine();
                 bookToRemove = searchById(id);
                 break;
             case 2:
-                System.out.print("Enter ISBN: ");
-                String isbn = sc.nextLine();
-                bookToRemove = searchByISBN(isbn);
-                break;
-            case 3:
-                System.out.print("Enter title: ");
+                
+                System.out.println("Enter title: ");
                 String title = sc.nextLine();
                 bookToRemove = searchByTitle(title);
+                break;
+            case 3:
+                System.out.println("Enter ISBN: ");
+                String isbn = sc.nextLine();
+                bookToRemove = searchByISBN(isbn);
                 break;
             default:
                 System.out.println("Invalid choice.");
@@ -134,6 +130,15 @@ public class BookService {
         return null;
     }
     
+    public Book searchByCategory(String category) {
+        for (Book book : books) {
+            if (book.getTitle().equalsIgnoreCase(category)) {
+                return book;
+            }
+        }
+        return null;
+    }
+    
     public void listAllBooks() {
         if (books.isEmpty()) {
             System.out.println("No books in the library.");
@@ -142,7 +147,7 @@ public class BookService {
 
         System.out.println("\n=== All Books ===");
         for (Book book : books) {
-            System.out.println(book); // This will call toString()
+            System.out.println(book);
         }
     }
     
@@ -154,6 +159,5 @@ public class BookService {
         System.out.println("Published Year: " + book.getPublishedYear());
         System.out.println("Category: " + book.getCategory());
         System.out.println("Available: " + (book.isIsAvailable() ? "Yes" : "No"));
-        System.out.println("----------------------------------------");
     }
 }
