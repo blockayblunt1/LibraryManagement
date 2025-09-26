@@ -7,8 +7,6 @@ package librarymanagement;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
-import librarymanagement.Book;
-
 /**
  *
  * @author madvillain
@@ -60,7 +58,7 @@ public class BookService {
         Book bookToRemove = searchById(id);
 
         if (bookToRemove == null) {
-            System.out.println("No book found with ID: " + id);
+            System.out.println("No book found.");
             return;
         }
 
@@ -71,66 +69,56 @@ public class BookService {
     public Book searchById(int id) {
         for (Book book : books) {
             if (book.getId() == id) {
+                System.out.println(book);
                 return book;
             }
         }
+        System.out.println("No books found.");
         return null;
     }
 
-    public Book searchByISBN(String isbn) {
-        for (Book book : books) {
-            if (book.getIsbn().equalsIgnoreCase(isbn)) {
-                return book;
+        public Book searchByISBN(String isbn) {
+            for (Book book : books) {
+                if (book.getIsbn().equalsIgnoreCase(isbn)) {
+                    System.out.println(book);
+                    return book;
+                }
             }
+            System.out.println("No books found.");
+            return null;
         }
-        return null;
-    }
 
-    public Book searchByTitle(String title) {
-        for (Book book : books) {
-            if (book.getTitle().equalsIgnoreCase(title)) {
-                return book;
+        public Book searchByTitle(String title) {
+            for (Book book : books) {
+                if (book.getTitle().equalsIgnoreCase(title)) {
+                    System.out.println(book);
+                    return book;
+                }
             }
+            System.out.println("No books found.");
+            return null;
         }
-        return null;
-    }
-    
-    public Book searchByPublishedYear(int publishedYear) {
-        for (Book book : books) {
-            if (book.getPublishedYear() == publishedYear) {
-                return book;
-            }
-        }
-        return null;
-    }
-    
-    public Book searchByCategory(String category) {
-        for (Book book : books) {
-            if (book.getTitle().equalsIgnoreCase(category)) {
-                return book;
-            }
-        }
-        return null;
-    }
-    
-    public void removeBookById(Scanner sc) {
-        System.out.print("Enter book ID: ");
-        int id = sc.nextInt();
-        sc.nextLine(); // Clear buffer
 
-        boolean foundById = false;
-        for (int i = 0; i < books.size(); i++) {
-            if (books.get(i).getId() == id) {
-                books.remove(i);
-                foundById = true;
-                System.out.println("Book with ID " + id + " removed successfully!");
-                break;
+        public Book searchByPublishedYear(int publishedYear) {
+            for (Book book : books) {
+                if (book.getPublishedYear() == publishedYear) {
+                    System.out.println(book);
+                    return book;
+                }
             }
+            System.out.println("No books found.");
+            return null;
         }
-        if (!foundById) {
-            System.out.println("No book found with ID: " + id);
+
+        public Book searchByCategory(String category) {
+            for (Book book : books) {
+                if (book.getTitle().equalsIgnoreCase(category)) {
+                    return book;
+                }
+            }
+            System.out.println("No books found.");
+            return null;
         }
-    }
 
     public void listAllBooks() {
         if (books.isEmpty()) {
