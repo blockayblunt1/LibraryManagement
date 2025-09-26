@@ -34,7 +34,8 @@ public class BookService {
 
         System.out.print("Enter published year: ");
         int publishedYear = sc.nextInt();
-
+        sc.nextLine();
+        
         System.out.print("Enter category: ");
         String category = sc.nextLine();
 
@@ -50,45 +51,18 @@ public class BookService {
         }
 
         System.out.println("\n=== Remove Book ===");
-        System.out.println("Remove by:");
-        System.out.println("1. ID");
-        System.out.println("2. Title");
-        System.out.println("3. ISBN");
-        System.out.println("Enter choice: ");
+        System.out.println("Enter Book ID to Remove");
+        System.out.print("Enter choice: ");
 
-        Book bookToRemove = null;
-        int searchChoice = sc.nextInt();
-        
-        switch (searchChoice) {
-            case 1:
-                System.out.println("Enter book ID: ");
-                int id = sc.nextInt();
-                bookToRemove = searchById(id);
-                break;
-            case 2:
-                
-                System.out.println("Enter title: ");
-                String title = sc.nextLine();
-                bookToRemove = searchByTitle(title);
-                break;
-            case 3:
-                System.out.println("Enter ISBN: ");
-                String isbn = sc.nextLine();
-                bookToRemove = searchByISBN(isbn);
-                break;
-            default:
-                System.out.println("Invalid choice.");
-                return;
-        }
+        int id = sc.nextInt();
+        sc.nextLine();
+
+        Book bookToRemove = searchById(id);
 
         if (bookToRemove == null) {
-            System.out.println("Book not found!");
+            System.out.println("No book found with ID: " + id);
             return;
         }
-
-        // Show the book details and remove immediately
-        System.out.println("\nRemoving book:");
-        displayBook(bookToRemove);
 
         books.remove(bookToRemove);
         System.out.println("Book removed successfully!");
@@ -139,6 +113,25 @@ public class BookService {
         return null;
     }
     
+    public void removeBookById(Scanner sc) {
+        System.out.print("Enter book ID: ");
+        int id = sc.nextInt();
+        sc.nextLine(); // Clear buffer
+
+        boolean foundById = false;
+        for (int i = 0; i < books.size(); i++) {
+            if (books.get(i).getId() == id) {
+                books.remove(i);
+                foundById = true;
+                System.out.println("Book with ID " + id + " removed successfully!");
+                break;
+            }
+        }
+        if (!foundById) {
+            System.out.println("No book found with ID: " + id);
+        }
+    }
+
     public void listAllBooks() {
         if (books.isEmpty()) {
             System.out.println("No books in the library.");
@@ -149,15 +142,5 @@ public class BookService {
         for (Book book : books) {
             System.out.println(book);
         }
-    }
-    
-    private void displayBook(Book book) {
-        System.out.println("ID: " + book.getId());
-        System.out.println("Title: " + book.getTitle());
-        System.out.println("Author: " + book.getAuthor());
-        System.out.println("ISBN: " + book.getIsbn());
-        System.out.println("Published Year: " + book.getPublishedYear());
-        System.out.println("Category: " + book.getCategory());
-        System.out.println("Available: " + (book.isIsAvailable() ? "Yes" : "No"));
     }
 }
