@@ -89,6 +89,9 @@ import java.util.Scanner;
                     id, title, author, isbn, publishedYear, category, isAvailable ? "Yes" : "No");
         }
     }
+
+    ///// UI
+    
     public class LibraryManagement {
 
         private static final Scanner sc = new Scanner(System.in);
@@ -203,6 +206,8 @@ import java.util.Scanner;
         }
     }
 
+    ///// xu ly du lieu
+
     class BookService {
         private List<Book> books = new ArrayList<>();
 
@@ -304,7 +309,7 @@ import java.util.Scanner;
 
         public Book searchByCategory(String category) {
             for (Book book : books) {
-                if (book.getTitle().equalsIgnoreCase(category)) {
+                if (book.getCategory().equalsIgnoreCase(category)) {
                     return book;
                 }
             }
