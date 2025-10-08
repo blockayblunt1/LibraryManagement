@@ -4,105 +4,111 @@
  */
 package librarymanagement;
 
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Scanner;
+import static librarymanagement.BookService.readInt;
 
 /**
  *
  * @author madvillain
  */
-    class Book {
-        private int id, publishedYear;
-        private String isbn, title, author, category;
-        private boolean isAvailable;
 
-        public Book(int id, int publishedYear, String isbn, String title, String author, String category, boolean isAvailable) {
-            this.id = id;
-            this.publishedYear = publishedYear;
-            this.isbn = isbn;
-            this.title = title;
-            this.author = author;
-            this.category = category;
-            this.isAvailable = isAvailable;
-        }
-
-        public int getId() {
-            return id;
-        }
-
-        public void setId(int id) {
-            this.id = id;
-        }
-
-        public int getPublishedYear() {
-            return publishedYear;
-        }
-
-        public void setPublishedYear(int publishedYear) {
-            this.publishedYear = publishedYear;
-        }
-
-        public String getIsbn() {
-            return isbn;
-        }
-
-        public void setIsbn(String isbn) {
-            this.isbn = isbn;
-        }
-
-        public String getTitle() {
-            return title;
-        }
-
-        public void setTitle(String title) {
-            this.title = title;
-        }
-
-        public String getAuthor() {
-            return author;
-        }
-
-        public void setAuthor(String author) {
-            this.author = author;
-        }
-
-        public String getCategory() {
-            return category;
-        }
-
-        public void setCategory(String category) {
-            this.category = category;
-        }
-
-        public boolean isIsAvailable() {
-            return isAvailable;
-        }
-
-        public void setIsAvailable(boolean isAvailable) {
-            this.isAvailable = isAvailable;
-        }
-
-        @Override
-        public String toString() {
-            return String.format("ID: %d | Title: %s | Author: %s | ISBN: %s | Year: %d | Category: %s | Available: %s",
-                    id, title, author, isbn, publishedYear, category, isAvailable ? "Yes" : "No");
-        }
-    }
-
-    ///// UI
-    
     public class LibraryManagement {
-
         private static final Scanner sc = new Scanner(System.in);
         private static final BookService bookService = new BookService();
 
-        public static void displayMenu() {
-            System.out.println("\n=== Library Management System ===");
-            System.out.println("1. Book Management");
-            System.out.println("2. List all books");
-            System.out.println("3. Search books");
-            System.out.println("0. Exit");
+        public static void main(String[] args) {
+            boolean exit = false;
+            while (!exit) {
+                displayMainMenu();
+                int choice = readInt(sc);
+
+                switch (choice) {
+                    case 1:
+                        librarianMenu();
+                        break;
+                    case 2:
+                        readerMenu();
+                        break;
+                    case 0:
+                        exit = true;
+                        System.out.println("Goodbye!");
+                        break;
+                    default:
+                        System.out.println("Invalid choice.");
+                }
+            }
+        }
+        
+        private static void librarianMenu() {
+            boolean backToMain = false;
+            while (!backToMain) {
+                displayLibrarianMenu();
+                int choice = readInt(sc);
+
+                switch (choice) {
+                    case 1:
+                        bookManagement();
+                        break;
+                    case 2:
+                        bookService.listAllBooks();
+                        break;
+                    case 3:
+                        bookSearch();
+                        break;
+                    case 0:
+                        backToMain = true;
+                        break;
+                    default:
+                        System.out.println("Invalid choice.");
+                }
+            }
+        }
+
+        private static void readerMenu() {
+            boolean backToMain = false;
+            while (!backToMain) {
+                displayReaderMenu();
+                int choice = readInt(sc);
+
+                switch (choice) {
+                    case 1:
+                        System.out.println("Borrow book functionality not implemented yet.");
+                        break;
+                    case 2:
+                        bookService.listAllBooks();
+                        break;
+                    case 3:
+                        bookSearch();
+                        break;
+                    default:
+                        System.out.println("Invalid choice. Please try again.");
+                        break;
+                }
+            }
+        }
+        
+        public static void displayMainMenu() {
+            System.out.println("\n== Library ==");
+            System.out.println("1. Librarian");
+            System.out.println("2. Reader");
+            System.out.println("0. Exit.");
+            System.out.print("Enter choice: ");
+        }
+
+        public static void displayLibrarianMenu() {
+            System.out.println("\n== Librarian Menu ==");
+            System.out.println("1. Book Management.");
+            System.out.println("2. List all books.");
+            System.out.println("3. Search books.");
+            System.out.println("0. Exit.");
+            System.out.print("Enter choice: ");
+        }
+
+        public static void displayReaderMenu() {
+            System.out.println("\n== Reader ==");
+            System.out.println("1. Borrow book.");
+            System.out.println("2. List all books.");
+            System.out.println("3. Search books.");
             System.out.print("Enter choice: ");
         }
 
@@ -118,7 +124,7 @@ import java.util.Scanner;
             boolean backToMain = false;
             while (!backToMain) {
                 displayBookMenu();
-                int choice = sc.nextInt();
+                int choice = readInt(sc);
 
                 switch (choice) {
                     case 1:
@@ -145,13 +151,13 @@ import java.util.Scanner;
             System.out.println("5. Search by Category");
             System.out.print("Enter choice: ");
 
-            int searchChoice = sc.nextInt();
+            int searchChoice = readInt(sc);
             sc.nextLine();
 
             switch (searchChoice) {
                 case 1:
                     System.out.print("Enter ID: ");
-                    int id = sc.nextInt();
+                    int id = readInt(sc);
                     bookService.searchById(id);
                     break;
                 case 2:
@@ -166,7 +172,7 @@ import java.util.Scanner;
                     break;
                 case 4:
                     System.out.print("Enter publish year: ");
-                    int year = sc.nextInt();
+                    int year = readInt(sc);
                     bookService.searchByPublishedYear(year);
                     break;
                 case 5:
@@ -178,154 +184,5 @@ import java.util.Scanner;
                     System.out.println("Invalid search option.");
             }
         }
-
-        public static void main(String[] args) {
-            boolean exit = false;
-            while (!exit) {
-                displayMenu();
-                int choice = sc.nextInt();
-
-                switch (choice) {
-                    case 1:
-                        bookManagement();
-                        break;
-                    case 2:
-                        bookService.listAllBooks();
-                        break;
-                    case 3:
-                        bookSearch();
-                        break;
-                    case 0:
-                        exit = true;
-                        System.out.println("Goodbye!");
-                        break;
-                    default:
-                        System.out.println("Invalid choice.");
-                }
-            }
-        }
     }
 
-    ///// xu ly du lieu
-
-    class BookService {
-        private List<Book> books = new ArrayList<>();
-
-        public void addBook(Scanner sc) {
-            System.out.println("\n=== Add New Book ===");
-
-            System.out.print("Enter book ID: ");
-            int id = sc.nextInt();
-            sc.nextLine();
-
-            System.out.print("Enter title: ");
-            String title = sc.nextLine();
-
-            System.out.print("Enter author: ");
-            String author = sc.nextLine();
-
-            System.out.print("Enter ISBN: ");
-            String isbn = sc.nextLine();
-
-            System.out.print("Enter published year: ");
-            int publishedYear = sc.nextInt();
-            sc.nextLine();
-
-            System.out.print("Enter category: ");
-            String category = sc.nextLine();
-
-            Book book = new Book(id, publishedYear, isbn, title, author, category, true);
-            books.add(book);
-            System.out.println("Book added successfully!");
-        }
-
-        public void removeBook(Scanner sc) {
-            if (books.isEmpty()) {
-                System.out.println("No books available to remove.");
-                return;
-            }
-
-            System.out.println("\n=== Remove Book ===");
-            System.out.println("Enter Book ID to Remove");
-            System.out.print("Enter choice: ");
-
-            int id = sc.nextInt();
-            sc.nextLine();
-
-            Book bookToRemove = searchById(id);
-
-            if (bookToRemove == null) {
-                System.out.println("No book found.");
-                return;
-            }
-
-            books.remove(bookToRemove);
-            System.out.println("Book removed successfully!");
-        }
-
-        public Book searchById(int id) {
-            for (Book book : books) {
-                if (book.getId() == id) {
-                    System.out.println(book);
-                    return book;
-                }
-            }
-            System.out.println("No books found.");
-            return null;
-        }
-
-        public Book searchByISBN(String isbn) {
-            for (Book book : books) {
-                if (book.getIsbn().equalsIgnoreCase(isbn)) {
-                    System.out.println(book);
-                    return book;
-                }
-            }
-            System.out.println("No books found.");
-            return null;
-        }
-
-        public Book searchByTitle(String title) {
-            for (Book book : books) {
-                if (book.getTitle().equalsIgnoreCase(title)) {
-                    System.out.println(book);
-                    return book;
-                }
-            }
-            System.out.println("No books found.");
-            return null;
-        }
-
-        public Book searchByPublishedYear(int publishedYear) {
-            for (Book book : books) {
-                if (book.getPublishedYear() == publishedYear) {
-                    System.out.println(book);
-                    return book;
-                }
-            }
-            System.out.println("No books found.");
-            return null;
-        }
-
-        public Book searchByCategory(String category) {
-            for (Book book : books) {
-                if (book.getCategory().equalsIgnoreCase(category)) {
-                    return book;
-                }
-            }
-            System.out.println("No books found.");
-            return null;
-        }
-
-        public void listAllBooks() {
-            if (books.isEmpty()) {
-                System.out.println("No books in the library.");
-                return;
-            }
-
-            System.out.println("\n=== All Books ===");
-            for (Book book : books) {
-                System.out.println(book);
-            }
-        }
-    }
