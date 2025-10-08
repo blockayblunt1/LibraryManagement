@@ -55,6 +55,9 @@ import static librarymanagement.BookService.readInt;
                     case 3:
                         bookSearch();
                         break;
+                    case 9:
+                        backToMain = true;
+                        break;
                     case 0:
                         backToMain = true;
                         break;
@@ -80,6 +83,9 @@ import static librarymanagement.BookService.readInt;
                     case 3:
                         bookSearch();
                         break;
+                    case 9:
+                        backToMain = true;
+                        break;
                     default:
                         System.out.println("Invalid choice. Please try again.");
                         break;
@@ -88,7 +94,7 @@ import static librarymanagement.BookService.readInt;
         }
         
         public static void displayMainMenu() {
-            System.out.println("\n== Library ==");
+            System.out.println("\n=== Library ===");
             System.out.println("1. Librarian");
             System.out.println("2. Reader");
             System.out.println("0. Exit.");
@@ -96,19 +102,21 @@ import static librarymanagement.BookService.readInt;
         }
 
         public static void displayLibrarianMenu() {
-            System.out.println("\n== Librarian Menu ==");
+            System.out.println("\n=== Librarian Menu ===");
             System.out.println("1. Book Management.");
             System.out.println("2. List all books.");
             System.out.println("3. Search books.");
+            System.out.println("9. Back");
             System.out.println("0. Exit.");
             System.out.print("Enter choice: ");
         }
 
         public static void displayReaderMenu() {
-            System.out.println("\n== Reader ==");
+            System.out.println("\n=== Reader ===");
             System.out.println("1. Borrow book.");
             System.out.println("2. List all books.");
             System.out.println("3. Search books.");
+            System.out.println("9. Back");
             System.out.print("Enter choice: ");
         }
 
@@ -116,7 +124,7 @@ import static librarymanagement.BookService.readInt;
             System.out.println("\n=== Book Management ===");
             System.out.println("1. Add Book");
             System.out.println("2. Remove Book");
-            System.out.println("9. Back to Main Menu");
+            System.out.println("9. Back");
             System.out.print("Enter choice: ");
         }
 

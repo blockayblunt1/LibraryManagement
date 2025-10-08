@@ -29,6 +29,7 @@ public class BookService {
 
         System.out.print("Enter book ID: ");
         int id = readInt(sc);
+        sc.nextLine();
 
         System.out.print("Enter title: ");
         String title = sc.nextLine();
@@ -41,6 +42,7 @@ public class BookService {
 
         System.out.print("Enter published year: ");
         int publishedYear = readInt(sc);
+        sc.nextLine();
 
         System.out.print("Enter category: ");
         String category = sc.nextLine();
@@ -57,7 +59,7 @@ public class BookService {
         }
 
         System.out.println("\n=== Remove Book ===");
-        System.out.println("Enter Book ID to Remove");
+        System.out.println("Enter Book ID to Remove: ");
         System.out.print("Enter choice: ");
 
         int id = readInt(sc);
@@ -128,36 +130,7 @@ public class BookService {
     }
 
     public void borrowBook(Scanner sc) {
-        if (books.isEmpty()) {
-            System.out.println("No books available to borrow.");
-            return;
-        }
-
-        System.out.println("\n=== Borrow Book ===");
-        System.out.print("Enter Book ID to borrow: ");
-        int id = readInt(sc);
-
-        Book bookToBorrow = null;
-        for (Book book : books) {
-            if (book.getId() == id) {
-                bookToBorrow = book;
-                break;
-            }
-        }
-
-        if (bookToBorrow == null) {
-            System.out.println("Book not found.");
-            return;
-        }
-
-        if (!bookToBorrow.isIsAvailable()) {
-            System.out.println("Book is already borrowed.");
-            return;
-        }
-
-        bookToBorrow.setIsAvailable(false);
-        System.out.println("Book borrowed successfully!");
-        System.out.println("Borrowed: " + bookToBorrow.getTitle());
+        System.out.println("NOT IMPLEMENTED.");
     }
 
     public void listAllBooks() {
