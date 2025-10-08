@@ -130,7 +130,6 @@ public class BookService {
     }
 
     public void borrowBook(Scanner sc) {
-        System.out.println("NOT IMPLEMENTED.");
     }
 
     public void listAllBooks() {

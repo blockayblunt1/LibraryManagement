@@ -25,7 +25,7 @@ public class Book {
     }
 
     public int getId() {
-        return id;
+        return this.id;
     }
 
     public void setId(int id) {
@@ -33,7 +33,7 @@ public class Book {
     }
 
     public int getPublishedYear() {
-        return publishedYear;
+        return this.publishedYear;
     }
 
     public void setPublishedYear(int publishedYear) {
@@ -41,7 +41,7 @@ public class Book {
     }
 
     public String getIsbn() {
-        return isbn;
+        return this.isbn;
     }
 
     public void setIsbn(String isbn) {
@@ -49,7 +49,7 @@ public class Book {
     }
 
     public String getTitle() {
-        return title;
+        return this.title;
     }
 
     public void setTitle(String title) {
@@ -57,7 +57,7 @@ public class Book {
     }
 
     public String getAuthor() {
-        return author;
+        return this.author;
     }
 
     public void setAuthor(String author) {
@@ -65,7 +65,7 @@ public class Book {
     }
 
     public String getCategory() {
-        return category;
+        return this.category;
     }
 
     public void setCategory(String category) {
@@ -73,7 +73,7 @@ public class Book {
     }
 
     public boolean isIsAvailable() {
-        return isAvailable;
+        return this.isAvailable;
     }
 
     public void setIsAvailable(boolean isAvailable) {
@@ -83,6 +83,6 @@ public class Book {
     @Override
     public String toString() {
         return String.format("ID: %d | Title: %s | Author: %s | ISBN: %s | Year: %d | Category: %s | Available: %s",
-                id, title, author, isbn, publishedYear, category, isAvailable ? "Yes" : "No");
+                this.id, this.title, this.author, this.isbn, this.publishedYear, this.category, this.isAvailable ? "Yes" : "No");
     }
 }
