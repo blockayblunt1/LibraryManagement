@@ -17,7 +17,7 @@ public class Librarian extends User {
     }
 
     public int getLibrarianId() {
-        return getUserId();
+        return this.getUserId();
     }
 
     public void setLibrarianId(int librarianId) {
@@ -25,7 +25,7 @@ public class Librarian extends User {
     }
 
     public String getEmployeeNumber() {
-        return employeeNumber;
+        return this.employeeNumber;
     }
 
     public void setEmployeeNumber(String employeeNumber) {
@@ -34,7 +34,7 @@ public class Librarian extends User {
 
     @Override
     public String toString() {
-        return "Librarian{" + "librarianId=" + getUserId() + ", name=" + getName() +  ", email=" + getEmail() + ", employeeNumber=" + employeeNumber + '}';
+        return "Librarian{" + "librarianId=" + this.getUserId() + ", name=" + this.getName() +  ", email=" + this.getEmail() + ", employeeNumber=" + this.employeeNumber + '}';
     }
     
     
