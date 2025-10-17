@@ -19,7 +19,7 @@ public class Reader extends User {
     }
 
     public String getPhoneNumber() {
-        return phoneNumber;
+        return this.phoneNumber;
     }
 
     public void setPhoneNumber(String phoneNumber) {
@@ -27,7 +27,7 @@ public class Reader extends User {
     }
 
     public String getAddress() {
-        return address;
+        return this.address;
     }
 
     public void setAddress(String address) {
@@ -35,16 +35,15 @@ public class Reader extends User {
     }
 
     public int getReaderId() {
-        return getUserId();
+        return this.getUserId();
     }
 
     public void setReaderId(int readerId) {
-        setUserId(readerId);
+        this.setUserId(readerId);
     }
 
     @Override
     public String toString() {
-        return "Reader{" + "readerId=" + getUserId() + ", name=" + getName() + 
-               ", email=" + getEmail() + ", phoneNumber=" + phoneNumber + ", address=" + address + '}';
+        return "Reader{" + "readerId=" + this.getUserId() + ", name=" + this.getName() + ", email=" + this.getEmail() + ", phoneNumber=" + this.phoneNumber + ", address=" + this.address + '}';
     }
 }

@@ -20,7 +20,7 @@ public class User {
     }
 
     public int getUserId() {
-        return userId;
+        return this.userId;
     }
 
     public void setUserId(int userId) {
@@ -28,7 +28,7 @@ public class User {
     }
 
     public String getName() {
-        return name;
+        return this.name;
     }
 
     public void setName(String name) {
@@ -36,7 +36,7 @@ public class User {
     }
 
     public String getEmail() {
-        return email;
+        return this.email;
     }
 
     public void setEmail(String email) {
@@ -45,6 +45,6 @@ public class User {
 
     @Override
     public String toString() {
-        return "User{" + "userId=" + userId + ", name=" + name + ", email=" + email + '}';
+        return "User{" + "userId=" + this.userId + ", name=" + this.name + ", email=" + this.email + '}';
     }
 }
