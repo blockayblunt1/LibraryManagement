@@ -52,33 +52,12 @@ public class ReaderService {
         Reader readerToRemove = findReaderById(id);
         
         if (readerToRemove == null) {
-            System.out.println("Reader not found!");
+            System.out.println("Reader not found.");
             return;
         }
         
-        System.out.println("Reader to remove: " + readerToRemove);
-        System.out.print("Are you sure? (y/n): ");
-        sc.nextLine();
-        String confirm = sc.nextLine();
-        
-        if (confirm.toLowerCase().equals("y") || confirm.toLowerCase().equals("yes")) {
-            readers.remove(readerToRemove);
-            System.out.println("Reader removed successfully!");
-        } else {
-            System.out.println("Remove operation cancelled.");
-        }
-    }
-    
-    public void listAllReaders() {
-        if (readers.isEmpty()) {
-            System.out.println("No readers in the system.");
-            return;
-        }
-        
-        System.out.println("\n=== All Readers ===");
-        for (Reader reader : readers) {
-            System.out.println(reader);
-        }
+        readers.remove(readerToRemove);
+        System.out.println("Reader removed successfully!");
     }
     
     public Reader findReaderById(int id) {
@@ -90,79 +69,98 @@ public class ReaderService {
         return null;
     }
     
-    public void searchReaderById(Scanner sc) {
-        System.out.print("Enter Reader ID to search: ");
-        int id = BookService.readInt(sc);
+    public void listAllReaders() {
+        if (readers.isEmpty()) {
+            System.out.println("No readers in the system.");
+            return;
+        }
         
-        Reader reader = findReaderById(id);
-        if (reader != null) {
-            System.out.println("\n=== Reader Found ===");
-            System.out.println(reader);
-        } else {
-            System.out.println("Reader not found!");
+        System.out.println("\n=== All Readers ===");
+        for (Reader reader : readers) {
+            System.out.println("ID: " + reader.getReaderId() + ", Name: " + reader.getName() + ", Email: " + reader.getEmail() + ", Phone: " + reader.getPhoneNumber() + ", Address: " + reader.getAddress());
         }
     }
     
-    public void searchReaderByName(Scanner sc) {
-        System.out.print("Enter reader name to search: ");
-        sc.nextLine();
-        String searchName = sc.nextLine();
-        
-        System.out.println("\n=== Search Results ===");
-        boolean found = false;
-        
-        for (Reader reader : readers) {
-            if (reader.getName().toLowerCase().contains(searchName.toLowerCase())) {
-                System.out.println(reader);
-                found = true;
-            }
-        }
-        
-        if (!found) {
-            System.out.println("No readers found with name containing: " + searchName);
-        }
+    public boolean authenticateReader(int readerId) {
+        return findReaderById(readerId) != null;
     }
     
     public void updateReader(Scanner sc) {
-        System.out.print("Enter Reader ID to update: ");
-        int id = BookService.readInt(sc);
-        
-        Reader reader = findReaderById(id);
-        if (reader == null) {
-            System.out.println("Reader not found!");
+        if (readers.isEmpty()) {
+            System.out.println("No readers available to update.");
             return;
         }
         
         System.out.println("\n=== Update Reader ===");
-        System.out.println("Current info: " + reader);
-        
+        System.out.print("Enter Reader ID to update: ");
+        int id = BookService.readInt(sc);
         sc.nextLine();
         
-        System.out.print("Enter new name (current: " + reader.getName() + "): ");
+        Reader reader = findReaderById(id);
+        
+        if (reader == null) {
+            System.out.println("Reader not found.");
+            return;
+        }
+        
+        System.out.println("Current details: " + reader);
+        System.out.println("\nEnter new details (press Enter to keep current value):");
+        
+        System.out.print("Enter name [" + reader.getName() + "]: ");
         String name = sc.nextLine();
         if (!name.trim().isEmpty()) {
             reader.setName(name);
         }
         
-        System.out.print("Enter new email (current: " + reader.getEmail() + "): ");
+        System.out.print("Enter email [" + reader.getEmail() + "]: ");
         String email = sc.nextLine();
         if (!email.trim().isEmpty()) {
             reader.setEmail(email);
         }
         
-        System.out.print("Enter new phone number (current: " + reader.getPhoneNumber() + "): ");
+        System.out.print("Enter phone number [" + reader.getPhoneNumber() + "]: ");
         String phoneNumber = sc.nextLine();
         if (!phoneNumber.trim().isEmpty()) {
             reader.setPhoneNumber(phoneNumber);
         }
         
-        System.out.print("Enter new address (current: " + reader.getAddress() + "): ");
+        System.out.print("Enter address [" + reader.getAddress() + "]: ");
         String address = sc.nextLine();
         if (!address.trim().isEmpty()) {
             reader.setAddress(address);
         }
         
         System.out.println("Reader updated successfully!");
-        System.out.println("Updated info: " + reader);
+    }
+    
+    public List<Reader> getAllReaders() {
+        return new ArrayList<>(readers);
+    }
+    
+    public void searchReaderById(Scanner sc) {
+        System.out.print("Enter Reader ID: ");
+        int id = BookService.readInt(sc);
+        Reader reader = findReaderById(id);
+        if (reader != null) {
+            System.out.println(reader);
+        } else {
+            System.out.println("Reader not found.");
+        }
+    }
+    
+    public void searchReaderByName(Scanner sc) {
+        System.out.print("Enter Reader Name: ");
+        sc.nextLine();
+        String name = sc.nextLine();
+        boolean found = false;
+        for (Reader r : readers) {
+            if (r.getName().toLowerCase().contains(name.toLowerCase())) {
+                System.out.println(r);
+                found = true;
+            }
+        }
+        if (!found) {
+            System.out.println("No readers found with that name.");
+        }
     }
 }

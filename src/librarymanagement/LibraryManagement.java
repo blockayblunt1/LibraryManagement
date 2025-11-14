@@ -17,6 +17,7 @@ import static librarymanagement.BookService.readInt;
         private static final BookService bookService = new BookService();
         private static final LibrarianService librarianService = new LibrarianService();
         private static final ReaderService readerService = new ReaderService();
+        private static final AuthorService authorService = new AuthorService();
 
         public static void main(String[] args) {
             boolean exit = false;
@@ -63,12 +64,11 @@ import static librarymanagement.BookService.readInt;
                     case 5:
                         librarianManagement();
                         break;
+                    case 6:
+                        authorManagement();
+                        break;
                     case 9:
                         backToMain = true;
-                        break;
-                    case 0:
-                        backToMain = true;
-                        System.out.println("Goodbye!");
                         break;
                     default:
                         System.out.println("Invalid choice.");
@@ -88,6 +88,15 @@ import static librarymanagement.BookService.readInt;
                         break;
                     case 2:
                         bookSearch();
+                        break;
+                    case 3:
+                        authorService.listAllAuthors();
+                        break;
+                    case 4:
+                        authorService.searchAuthorById(sc);
+                        break;
+                    case 5:
+                        authorService.searchAuthorByName(sc);
                         break;
                     case 9:
                         backToMain = true;
@@ -118,8 +127,8 @@ import static librarymanagement.BookService.readInt;
             System.out.println("3. Search books.");
             System.out.println("4. Reader Management.");
             System.out.println("5. Librarian Management.");
+            System.out.println("6. Author Management.");
             System.out.println("9. Back");
-            System.out.println("0. Exit.");
             System.out.print("Enter choice: ");
         }
 
@@ -127,6 +136,9 @@ import static librarymanagement.BookService.readInt;
             System.out.println("\n=== Reader Menu ===");
             System.out.println("1. List all books.");
             System.out.println("2. Search books.");
+            System.out.println("3. List All Authors");
+            System.out.println("4. Search Author by ID");
+            System.out.println("5. Search Author by Name");
             System.out.println("9. Back");
             System.out.println("0. Exit.");
             System.out.print("Enter choice: ");
@@ -169,6 +181,7 @@ import static librarymanagement.BookService.readInt;
             System.out.println("3. Search by ISBN");
             System.out.println("4. Search by Publish Year");
             System.out.println("5. Search by Category");
+            System.out.println("9. Back");
             System.out.print("Enter choice: ");
 
             int searchChoice = readInt(sc);
@@ -199,6 +212,9 @@ import static librarymanagement.BookService.readInt;
                     System.out.print("Enter category: ");
                     String category = sc.nextLine();
                     bookService.searchByCategory(category);
+                    break;
+                case 9:
+                    // Back to previous menu
                     break;
                 default:
                     System.out.println("Invalid search option.");
@@ -281,6 +297,52 @@ import static librarymanagement.BookService.readInt;
             System.out.println("1. Add Librarian");
             System.out.println("2. Remove Librarian");
             System.out.println("3. List All Librarians");
+            System.out.println("9. Back");
+            System.out.print("Enter choice: ");
+        }
+        
+        private static void authorManagement() {
+            boolean backToMain = false;
+            while (!backToMain) {
+                displayAuthorManagementMenu();
+                int choice = readInt(sc);
+
+                switch (choice) {
+                    case 1:
+                        authorService.addAuthor(sc);
+                        break;
+                    case 2:
+                        authorService.listAllAuthors();
+                        break;
+                    case 3:
+                        authorService.searchAuthorById(sc);
+                        break;
+                    case 4:
+                        authorService.searchAuthorByName(sc);
+                        break;
+                    case 5:
+                        authorService.updateAuthor(sc);
+                        break;
+                    case 6:
+                        authorService.removeAuthor(sc);
+                        break;
+                    case 9:
+                        backToMain = true;
+                        break;
+                    default:
+                        System.out.println("Invalid choice.");
+                }
+            }
+        }
+        
+        public static void displayAuthorManagementMenu() {
+            System.out.println("\n=== Author Management ===");
+            System.out.println("1. Add Author");
+            System.out.println("2. List All Authors");
+            System.out.println("3. Search Author by ID");
+            System.out.println("4. Search Author by Name");
+            System.out.println("5. Update Author");
+            System.out.println("6. Remove Author");
             System.out.println("9. Back");
             System.out.print("Enter choice: ");
         }

@@ -129,9 +129,6 @@ public class BookService {
         return null;
     }
 
-    public void borrowBook(Scanner sc) {
-    }
-
     public void listAllBooks() {
         if (books.isEmpty()) {
             System.out.println("No books in the library.");

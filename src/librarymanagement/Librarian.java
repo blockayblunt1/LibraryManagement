@@ -21,7 +21,7 @@ public class Librarian extends User {
     }
 
     public void setLibrarianId(int librarianId) {
-        setUserId(librarianId);
+        this.setUserId(librarianId);
     }
 
     public String getEmployeeNumber() {
