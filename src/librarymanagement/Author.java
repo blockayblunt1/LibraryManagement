@@ -8,33 +8,22 @@ package librarymanagement;
  *
  * @author madvillain
  */
-public class Author {
-    private int authorId;
-    private String name;
+public class Author extends User {
     private String nationality;
     private int birthYear;
 
-    public Author(int authorId, String name, String nationality, int birthYear) {
-        this.authorId = authorId;
-        this.name = name;
+    public Author(int authorId, String name, String email, String nationality, int birthYear) {
+        super(authorId, name, email);
         this.nationality = nationality;
         this.birthYear = birthYear;
     }
 
     public int getAuthorId() {
-        return this.authorId;
+        return this.getUserId();
     }
 
     public void setAuthorId(int authorId) {
-        this.authorId = authorId;
-    }
-
-    public String getName() {
-        return this.name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
+        this.setUserId(authorId);
     }
 
     public String getNationality() {
@@ -55,6 +44,6 @@ public class Author {
 
     @Override
     public String toString() {
-        return "Author{" + "authorId=" + this.authorId + ", name=" + this.name + ", nationality=" + this.nationality + ", birthYear=" + this.birthYear + '}';
+        return "Author{" + "authorId=" + this.getUserId() + ", name=" + this.getName() + ", email=" + this.getEmail() + ", nationality=" + this.nationality + ", birthYear=" + this.birthYear + '}';
     }
 }

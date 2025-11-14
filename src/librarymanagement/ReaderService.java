@@ -106,25 +106,25 @@ public class ReaderService {
         System.out.println("Current details: " + reader);
         System.out.println("\nEnter new details (press Enter to keep current value):");
         
-        System.out.print("Enter name [" + reader.getName() + "]: ");
+        System.out.print("Enter name: ");
         String name = sc.nextLine();
         if (!name.trim().isEmpty()) {
             reader.setName(name);
         }
         
-        System.out.print("Enter email [" + reader.getEmail() + "]: ");
+        System.out.print("Enter email: ");
         String email = sc.nextLine();
         if (!email.trim().isEmpty()) {
             reader.setEmail(email);
         }
         
-        System.out.print("Enter phone number [" + reader.getPhoneNumber() + "]: ");
+        System.out.print("Enter phone number: ");
         String phoneNumber = sc.nextLine();
         if (!phoneNumber.trim().isEmpty()) {
             reader.setPhoneNumber(phoneNumber);
         }
         
-        System.out.print("Enter address [" + reader.getAddress() + "]: ");
+        System.out.print("Enter address: ");
         String address = sc.nextLine();
         if (!address.trim().isEmpty()) {
             reader.setAddress(address);

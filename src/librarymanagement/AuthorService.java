@@ -25,6 +25,9 @@ public class AuthorService {
         System.out.print("Enter name: ");
         String name = sc.nextLine();
         
+        System.out.print("Enter email: ");
+        String email = sc.nextLine();
+        
         System.out.print("Enter nationality: ");
         String nationality = sc.nextLine();
         
@@ -32,7 +35,7 @@ public class AuthorService {
         int birthYear = BookService.readInt(sc);
         sc.nextLine();
         
-        Author author = new Author(id, name, nationality, birthYear);
+        Author author = new Author(id, name, email, nationality, birthYear);
         authors.add(author);
         System.out.println("Author added successfully!");
     }
@@ -127,19 +130,25 @@ public class AuthorService {
         System.out.println("Current details: " + author);
         System.out.println("\nEnter new details (press Enter to keep current value):");
         
-        System.out.print("Enter name [" + author.getName() + "]: ");
+        System.out.print("Enter name: ");
         String name = sc.nextLine();
         if (!name.trim().isEmpty()) {
             author.setName(name);
         }
         
-        System.out.print("Enter nationality [" + author.getNationality() + "]: ");
+        System.out.print("Enter email: ");
+        String email = sc.nextLine();
+        if (!email.trim().isEmpty()) {
+            author.setEmail(email);
+        }
+        
+        System.out.print("Enter nationality: ");
         String nationality = sc.nextLine();
         if (!nationality.trim().isEmpty()) {
             author.setNationality(nationality);
         }
         
-        System.out.print("Enter birth year [" + author.getBirthYear() + "]: ");
+        System.out.print("Enter birth year: ");
         String birthYearStr = sc.nextLine();
         if (!birthYearStr.trim().isEmpty()) {
             try {
